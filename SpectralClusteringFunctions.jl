@@ -43,9 +43,9 @@ end
 function SpectralClustering(k::Integer, V, W)
     _, _, _, ϕ =  getSpectralUtility(V, W)
     clustering = kmeans(transpose(ϕ[:, 2:k]), k)
-    cluster_groups = assignments(clustering)
-    clusters = [V[cluster_groups .== i] for i in 1:k]
-    return clusters
+    clusterIdx = assignments(clustering)
+    clusters = [V[clusterIdx .== i] for i in 1:k]
+    return clusters, clusterIdx
 end
 
 function getNormals(N::Integer, R::Float64 = 1.0, sd_radial::Union{Float64,Vector{Float64}} = 1.0, sd_angular::Union{Float64,Vector{Float64}} = 1.0)
