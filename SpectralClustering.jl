@@ -65,7 +65,7 @@ clustercolors = colors[(length(k)+1):(length(k)+K)]
 iter = 0
 for (i,cluster) in enumerate(k)
     Makie.scatter!(scatterAx, cluster, marker = markers[i], markersize = 15, color = scattercolors[i])
-    #for j in 1:size(cluster,1)
+    #for j in 1:size(cluster,1) #To color the markers according to the classification.
     #    global iter 
     #    iter = iter + 1
     #    Makie.scatter!(scatterAx, cluster[j,:]', marker = markers[i], markersize = 15, color = clustercolors[clusterIdx[iter]])
@@ -83,7 +83,7 @@ end
 Makie.linesegments!(connection_list[:,1], connection_list[:,2], 
         linewidth = 0.3*connection_strength, alpha = 0.1)
 
-
+#Drawing convex hulls of the points in the clusters.
 markers = 'A':'Z'
 for (i, C) in enumerate(clusters)
     hull = convex_hull([X[i,:] for i in C])
@@ -97,9 +97,11 @@ end
 #contFig = Makie.Figure()
 #contourAx = Makie.Axis(contFig[1,1])
 contourAx = Makie.Axis(fig[2,1])
+#Adds markers to show the location mean of the distributions
 for (i,cluster) in enumerate(k)
     Makie.scatter!(contourAx, normals[i].μ', marker = markers[i], markersize = 15, color = scattercolors[i])
 end
+#Contour plot of the distributions
 for (i,p) in enumerate(normals)
     if n[i] == 0 continue end
     local μ, Σ
