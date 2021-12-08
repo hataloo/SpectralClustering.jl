@@ -1,4 +1,5 @@
 # Spectral clustering in Julia
+<img src="Cluster4.png" alt="alt text" height="300"><img src="Cluster7.png" alt="alt text" height="300"><img src="Contour7.png" alt="alt text" height="300">
 
 Tested using Julia 1.6.2
 
